@@ -39,8 +39,21 @@ export interface IOrder {
 export interface IProductsData {
 	products: IProductList[];
 	preview: string | null;
+  setProducts(products: IProductList[]): void;
+	getProducts(): IProductList[];
+	getProduct(id: string): IProductList;
+	saveProduct(product: IProductList): void;
+	savePreview(product: IProductList): void;
 }
 
 export type TProductBasket = Pick<IProductList, 'id' | 'title' | 'price'>;
 
 export type TPaymentMethod = 'card' | 'cash'; 
+
+export type ApiPostMethods = 'POST' | 'PUT' | 'DELETE';
+
+export interface IApi {
+	baseUrl: string;
+	get<T>(uri: string): Promise<T>;
+	post<T>(uri: string, data: object, method?: ApiPostMethods): Promise<T>;
+}
