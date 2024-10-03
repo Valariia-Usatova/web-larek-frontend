@@ -1,7 +1,7 @@
 // Интерфейсы API-клиента
 export interface IApiClient {
-  getProducts(): Promise<IProduct[]>;
-  getProduct(id: string): Promise<IProduct>;
+  getProducts(): Promise<IProductList[]>;
+  getProduct(id: string): Promise<IProductList>;
   createOrder(order: IOrder): Promise<IOrder>;
 }
 // Интерфейс для описания товара
