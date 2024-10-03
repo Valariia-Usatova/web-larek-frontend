@@ -20,13 +20,6 @@ export interface IBasketItem {
   items: TProductBasket[]; 
 }
 
-export interface IOrderForm {
-  items: IProductList[];
-  address?: string;
-  email: string;
-  phone: string;
-}
-
 export interface IOrder {
   id: string;
   items: TProductBasket[];
@@ -46,11 +39,35 @@ export interface IProductsData {
 	savePreview(product: IProductList): void;
 }
 
+export interface IBasketData {
+  products: TProductBasket[];
+	addToBasket(product: IProductList): void;
+	deleteFromBasket(product: IProductList): void;
+	getCardIndex(product: IProductList): number;
+	getButtonStatus(product: TProductBasket): string;
+	getBasketPrice(): number;
+	getBasketQuantity(): number;
+	clearBasket(): void;
+	sendBasketToOrder(orderData: IOrderData): void;
+}
+
+export interface IOrderData {
+  formErrors: TFormErrors;
+  order: IOrder;
+  products: TProductBasket[];
+  address: string;
+  email: string;
+  phone: string;
+  payment: string;
+}
+
 export type TProductBasket = Pick<IProductList, 'id' | 'title' | 'price'>;
 
 export type TPaymentMethod = 'card' | 'cash'; 
 
 export type ApiPostMethods = 'POST' | 'PUT' | 'DELETE';
+
+export type TFormErrors = Partial<Record<keyof IOrder, string>>;
 
 export interface IApi {
 	baseUrl: string;
